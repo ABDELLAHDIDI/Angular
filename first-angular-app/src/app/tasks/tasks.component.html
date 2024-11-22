@@ -1,0 +1,40 @@
+@if(isAddingTask){
+   <app-newtask 
+   (Cancel)="onCancelAddTask()" 
+   (Add)="onAddTask($event)"
+   />
+  } 
+
+<section>
+    <header>
+        <h2>{{name}}'s task</h2>
+        <menu>
+            <button (click)="onStartAddTask()">
+                Add Task
+            </button>
+
+            <!-- @if(isAddingTask){
+                <form>
+                    <label>title   : </label>
+                    <input type="text" ng-model="addedTask.title" required><br>
+                    <label>dueDate : </label>
+                    <input type="text" ng-model="addedTask.dueDate" required><br>
+                    <label>Summary : </label>
+                    <input type="text" ng-model="addedTask.summary" required><br>
+                    <button (submit)="onSubmit()">submit</button>
+                </form>
+              }  -->
+
+        </menu>
+    </header>
+    <ul>
+        @for (task of SelectedUserTasks ; track task.id ) {
+<li>
+    <app-task [task]="task"  (complete)="onCompleteTask($event)"/>
+</li>
+        }
+    </ul>
+
+</section>
+
+
