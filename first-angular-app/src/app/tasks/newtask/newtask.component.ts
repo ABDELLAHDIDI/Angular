@@ -5,7 +5,8 @@ import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-newtask',
-  imports: [FormsModule],
+  // imports: [FormsModule],
+  standalone: false , 
   templateUrl: './newtask.component.html',
   styleUrl: './newtask.component.css'
 })
