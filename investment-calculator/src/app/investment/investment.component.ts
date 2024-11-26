@@ -17,19 +17,19 @@ annualInvestment=0;
 expectedReturn=0;
 duration=0;
 
-@Output() result = new EventEmitter<ResultInvestmentData[]>();
 
 constructor( private investmentService: InvestmentService ){}
 
-onCalculate(){ 
- const result =  this.investmentService.calculateInvestmentResults({
+onCalculate(){  
+  this.investmentService.calculateInvestmentResults({
   initialInvestment : this.initialInvestment ,
   duration : this.duration ,
   annualInvestment: this.annualInvestment, 
   expectedReturn: this.expectedReturn 
  });
-  this.result.emit(result);
   
+ console.log(  this.investmentService.resultData);
+ 
 }
 
 

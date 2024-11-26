@@ -1,0 +1,25 @@
+@if(resultInvestmentData()){
+    <table>
+        <thead>
+            <td>year</td>
+            <td>interest</td>
+            <td>valueEndOfYear</td>
+            <td>annualInvestment</td>
+            <td>totalInterest</td>
+            <td>totalAmountInvested</td>
+    
+        </thead>
+        <tbody>
+    @for (item of resultInvestmentData(); track $index) {
+        <tr>
+            <td>{{item.year | currency }}  </td>
+            <td>{{item.interest | currency}}</td>
+            <td>{{item.valueEndOfYear | currency }}</td>
+            <td>{{item.annualInvestment | currency }}</td>
+            <td>{{item.totalInterest | currency}}</td>
+            <td>{{item.totalAmountInvested | currency }}</td>
+    
+        </tr>
+    }
+</tbody>
+</table>}

@@ -1,6 +1,6 @@
 <div>
-    <form (ngSubmit)="onCalculate()">
-        <label>INITIAL INVESTMENT </label><br/>
+    <form (ngSubmit)="onCalculate()"  >
+        <label name="initialInvestment" >INITIAL INVESTMENT </label><br/>
         <input type="number" name="initialInvestment" [(ngModel)]="initialInvestment"/><br/>
         <label>ANNUAL INVESTMENT </label><br/>
         <input type="number" name="annualInvestment" [(ngModel)]="annualInvestment"/><br/>

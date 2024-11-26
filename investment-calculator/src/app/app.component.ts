@@ -2,23 +2,16 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from "./header/header.component";
 import { InvestmentComponent } from "./investment/investment.component";
 import { ResultInvestmentData } from './investment/investment.model';
+import { CurrencyPipe } from '@angular/common';
+import { InvestmentTableComponent } from "./investment-table/investment-table.component";
 
 @Component({
   selector: 'app-root',
-  imports: [HeaderComponent, InvestmentComponent],
+  imports: [HeaderComponent, InvestmentComponent,  InvestmentTableComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'investment-calculator';
-  resultInvestment = false ; 
-  resultInvestmentData !: ResultInvestmentData [] ;
-  onResult(resultInvestmentData: ResultInvestmentData[] ){
-    if(resultInvestmentData && resultInvestmentData.length > 0 ){
-    this.resultInvestment = true  ;
-    this.resultInvestmentData=resultInvestmentData;
-  }
-  console.log('resultInvestment : ' +this.resultInvestment);
-  
-  }
+
 }
