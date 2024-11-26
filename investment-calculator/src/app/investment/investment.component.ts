@@ -5,8 +5,7 @@ import { InvestmentService } from './investment.service';
 
 @Component({
   selector: 'app-investment',
-  standalone: true,
-  imports: [FormsModule],
+  standalone: false,
   templateUrl: './investment.component.html',
   styleUrl: './investment.component.css'
 })

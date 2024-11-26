@@ -7,7 +7,7 @@ import { InvestmentTableComponent } from "./investment-table/investment-table.co
 
 @Component({
   selector: 'app-root',
-  imports: [HeaderComponent, InvestmentComponent,  InvestmentTableComponent],
+  standalone: false  , 
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
