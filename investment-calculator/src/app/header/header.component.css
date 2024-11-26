@@ -1,0 +1,18 @@
+header {
+    text-align: center;
+    margin: 3rem auto;
+    background-color: rgb(22, 163, 116);
+    width: 15rem;
+    height: 10rem;
+  }
+  
+  header img {
+    width: 5rem;
+    height: 5rem;
+    object-fit: contain;
+    background-color: transparent;
+  }
+  
+  header h1 {
+    font-size: 1.5rem;
+  }

@@ -1,0 +1,30 @@
+
+<app-header/> 
+    <app-investment  (result)="onResult($event)"/>
+    @if(resultInvestment){
+    <table>
+        <thead>
+            <td>year</td>
+            <td>interest</td>
+            <td>valueEndOfYear</td>
+            <td>annualInvestment</td>
+            <td>totalInterest</td>
+            <td>totalAmountInvested</td>
+    
+        </thead>
+        <tbody>
+    @for (item of resultInvestmentData; track $index) {
+        <tr>
+            <td>{{item.year}}</td>
+            <td>{{item.interest}}</td>
+            <td>{{item.valueEndOfYear}}</td>
+            <td>{{item.annualInvestment}}</td>
+            <td>{{item.totalInterest}}</td>
+            <td>{{item.totalAmountInvested}}</td>
+    
+        </tr>
+    }
+</tbody>
+</table>}
+     
+ 
