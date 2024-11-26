@@ -14,7 +14,7 @@ export class AppComponent {
   resultInvestment = false ; 
   resultInvestmentData !: ResultInvestmentData [] ;
   onResult(resultInvestmentData: ResultInvestmentData[] ){
-    if(resultInvestmentData){
+    if(resultInvestmentData && resultInvestmentData.length > 0 ){
     this.resultInvestment = true  ;
     this.resultInvestmentData=resultInvestmentData;
   }
