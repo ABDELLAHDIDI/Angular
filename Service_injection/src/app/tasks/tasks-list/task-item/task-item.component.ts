@@ -1,8 +1,9 @@
-import { Component, computed, effect, input, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { Task, TaskStatus } from '../../task.model';
+import { Task, TASK_STATUS_OPTIONS, TaskStatus } from '../../task.model';
 import { TasksService } from '../../tasks.service';
+import { TasksServiceToken } from '../../../../main';
 
 @Component({
   selector: 'app-task-item',
@@ -13,8 +14,11 @@ import { TasksService } from '../../tasks.service';
 })
 export class TaskItemComponent {
   task = input.required<Task>();
+  private tasksService = inject(TasksServiceToken)
+  taskStatusOptions = inject(TASK_STATUS_OPTIONS)
+
   // taskStatus = signal('OPEN')
-  constructor(private tasksService: TasksService){
+  // constructor(private tasksService: TasksService){
     // effect(()=>{
      
     //     console.log('in computed :' +this.task().status); 
@@ -32,7 +36,7 @@ export class TaskItemComponent {
     // {
     //   allowSignalWrites: true, // Enable writing to signals inside effects
     // })
-  }
+  // }
   taskStatus = computed(() => {
 
     console.log('in computed :' +this.task().status); 
@@ -66,19 +70,19 @@ export class TaskItemComponent {
       default:
         break;
     }
-
-    this.tasksService.updateTask({
-      id:taskId ,
-      title: this.task().title,
-      description:this.task().description,
-      status:newStatus,
-    })
+//
+    // this.tasksService.updateTask({
+    //   id:taskId ,
+    //   title: this.task().title,
+    //   description:this.task().description,
+    //   status:newStatus,
+    // })
 
     
-    this.task().status = newStatus ; 
-    console.log( this.task().status );
+    // this.task().status = newStatus ; 
+    // console.log( this.task().status );
     
-
+this.tasksService.updateTaskStatus(taskId,newStatus);
 
   }
 }
