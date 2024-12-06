@@ -1,6 +1,29 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { debounce, debounceTime, first, from } from 'rxjs';
+
+// function equalValues(control: AbstractControl){
+//   const password = control.get('password')?.value;
+//   const confirmPassword = control.get('confirmPassword')?.value;
+//   if(password===confirmPassword){
+//     return null;
+//   }
+//   return {passwordsNotEqual: true}
+// }
+
+
+//this is factory function  
+function equalValues(controlName1: string , controlName2: string ){
+ return (control: AbstractControl)=>{
+  const val1= control.get(controlName1)?.value;
+  const val2= control.get(controlName2)?.value;
+  if(val1===val2){
+    return null;
+  }
+  return {valuesNotEqual: true}
+ }
+  
+}
 
 @Component({
   selector: 'app-signup',
@@ -20,21 +43,8 @@ export class SignupComponent  implements OnInit{
         ]
       }
     ),
-    // passwords : new FormGroup({
-    //     password : new FormControl('',{
-    //   validators: [
-    //     Validators.required, 
-    //     Validators.minLength(6),
-    //     ]
-    // }),
-    // confirmPassword : new FormControl('',{
-    //   validators: [
-    //     Validators.required, 
-    //     Validators.minLength(6),
-    //     ]
-    // }),
-    // }),
-    password : new FormControl('',{
+    passwords : new FormGroup({
+        password : new FormControl('',{
       validators: [
         Validators.required, 
         Validators.minLength(6),
@@ -46,6 +56,13 @@ export class SignupComponent  implements OnInit{
         Validators.minLength(6),
         ]
     }),
+    },{
+validators: [
+  // equalValues,
+  equalValues('password','confirmPassword')
+]
+    }),
+  
     firstName: new FormControl('',
       {
         validators: [
@@ -60,34 +77,37 @@ export class SignupComponent  implements OnInit{
         ]
       }
     ),
-    street: new FormControl('',
-      {
-        validators: [
-          Validators.required,   
-        ]
-      }
-    ),
-    number: new FormControl('',
-      {
-        validators: [
-          Validators.required,   
-        ]
-      }
-    ),
-    postalCode: new FormControl('',
-      {
-        validators: [
-          Validators.required,   
-        ]
-      }
-    ),
-    city: new FormControl('',
-      {
-        validators: [
-          Validators.required,   
-        ]
-      }
-    ),
+    address:new FormGroup({
+      street: new FormControl('',
+        {
+          validators: [
+            Validators.required,   
+          ]
+        }
+      ),
+      number: new FormControl('',
+        {
+          validators: [
+            Validators.required,   
+          ]
+        }
+      ),
+      postalCode: new FormControl('',
+        {
+          validators: [
+            Validators.required,   
+          ]
+        }
+      ),
+      city: new FormControl('',
+        {
+          validators: [
+            Validators.required,   
+          ]
+        }
+      ),
+    }),
+    
     role: new FormControl<
     'student' | 'teacher' | 'employee'
     | 'founder' | 'other' >('student',
@@ -101,7 +121,12 @@ export class SignupComponent  implements OnInit{
       validators: [
         Validators.required,   
       ]
-    })
+    }),
+    source: new FormArray([
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false)
+    ])
   })
 
   get emailIsInvalid(){
@@ -113,25 +138,25 @@ export class SignupComponent  implements OnInit{
   }
 
   get passwordIsInvalid(){
-    return(
-      this.form.controls.password.touched &&
-      this.form.controls.password.dirty &&
-      this.form.controls.password.invalid 
+    return(false
+      // this.form.controls.password.touched &&
+      // this.form.controls.password.dirty &&
+      // this.form.controls.password.invalid 
     )
   }
 
   get IsSubmitPossible(){
-    return ((
-      this.form.controls.password.valid  &&this.form.controls.password.valid 
+    return ((true
+      // this.form.controls.password.valid  &&this.form.controls.password.valid 
     ));
   }
   onSubmit(){ 
 
     console.log(this.form);
-    const enretedEmail = this.form.value.email ; 
-    const enretedPassword = this.form.value.password ; 
-    console.log(enretedEmail,enretedPassword);
-    this.form.reset();
+    // const enretedEmail = this.form.value.email ; 
+    // const enretedPassword = this.form.value.password ; 
+    // console.log(enretedEmail,enretedPassword);
+    // this.form.reset();
     }
     ngOnInit(): void {
 const loadedForm = window.localStorage.getItem('saved-form-email') ; 
